@@ -9,10 +9,13 @@ def check_arguments():
             stderr.write("Error: Wrong file name \n")
             exit(1)
 
-
+def parse_data_from_file(file_path):
+    with open(file_path, 'r') as file:
+        return file.read().strip().replace(",", "").splitlines()
 
 def main():
     check_arguments()
+    list_lines = parse_data_from_file(argv[1])
 
 
 if __name__ == "__main__":
