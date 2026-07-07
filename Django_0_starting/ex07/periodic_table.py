@@ -27,6 +27,22 @@ def create_nested_dict_from_list(list):
         elements[element_name] = internal_dict
     return elements
 
+def get_html_boilerplate():
+    html_template = """<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Periodic Table</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+    <table>
+        <tr>
+"""
+    return html_template
+
+
 def main():
     check_arguments()
     list_lines = parse_data_from_file(argv[1])
