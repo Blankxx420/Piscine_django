@@ -37,45 +37,51 @@ def get_html_boilerplate():
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <h1>Mendeleev Periodic Table of Elements</h1>
+    <h2>">Table Overview</h2>
+    <h3>Chemical Elements</h3>
     <table>
-        <tr>\n"""
+        <tr>
+"""
     return html_template
 
 def render_periodic_table(elements):
     column = 0
     buffer = ""
+    
     for name, info in elements.items():
-        while int(info["position"]) > column:
-            buffer += "\t\t<td></td>\n"
+        while column < int(info["position"]):
+            buffer += "\t\t\t<td></td>\n"
             column += 1
-        col_num = int(info['position'])
+            
         bg_class = "other-nonmetal"
-
-        if col_num == 0 and name != "Hydrogen":
+        if column == 0 and name != "Hydrogen":
             bg_class = "alkali-metal"
-        elif col_num == 1:
+        elif column == 1:
             bg_class = "alkaline-earth"
-        elif 2 <= col_num <= 11:
+        elif 2 <= column <= 11:
             bg_class = "transition-metal"
-        elif col_num == 16:
+        elif column == 16:
             bg_class = "halogen"
-        elif col_num == 17:
+        elif column == 17:
             bg_class = "noble-gas"
 
-        buffer += f'\t\t<td class="element-card {bg_class}">\n'
-        buffer += f"\t\t\t<h4>{name}</h4>\n"
-        buffer += "\t\t\t<ul>\n"
-
-        buffer += f"\t\t\t\t<li>No: {info["number"]}</li>\n"
-        buffer += f"\t\t\t\t<li>{info["small"]}</li>\n"
-        buffer += f"\t\t\t\t<li>{info["molar"]}</li>\n"
-        buffer += f"\t\t\t\t<li>{info["electron"]}</li>\n"
-        buffer += "\t\t\t</ul>\n"
-        buffer += "\t\t</td>\n"
+        buffer += f'\t\t\t<td class="element-card {bg_class}">\n'
+        buffer += f"\t\t\t\t<h4>{name}</h4>\n"
+        buffer += "\t\t\t\t<ul>\n"
+        buffer += f"\t\t\t\t\t<li>No: {info['number']}</li>\n"
+        buffer += f"\t\t\t\t\t<li>Symbol: {info['small']}</li>\n"
+        buffer += f"\t\t\t\t\t<li>Molar: {info['molar']}</li>\n"
+        buffer += f"\t\t\t\t\t<li>Electron: {info['electron']}</li>\n"
+        buffer += "\t\t\t\t</ul>\n"
+        buffer += "\t\t\t</td>\n"
+        
         column += 1
+
         if column == 18:
-            buffer += "\t\t</tr>\n\t\t<tr>\n"
             column = 0
+            if name != "Ununoctium": 
+                buffer += "\t\t</tr>\n\t\t<tr>\n"    
     return buffer
 
 def render_html_footer():
