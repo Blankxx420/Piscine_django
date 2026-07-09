@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CV</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, #job-title, .contact-info, header {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        #job-title {
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+        .experience, .education {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul, ol {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        hr {
+            border: none;
+            border-top: 2px solid #333;
+            margin: 20px auto;
+            width: 50%;
+        }
+
+        #separator {
+            border: none;
+            border-top: 2px solid #333;
+            margin: 10px auto 20px auto;
+            width: 25%;
+        }
+
+        caption {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{name} {firstname}</h1>
+        <h2>{age} ans</h2>
+        <p id="job-title">{job}</p>
+        <hr id="separator">
+        
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <ul>
+                <li>Email: <a href={email}>{email}</a></li>
+                <li>Phone: {phone_number}</li>
+            </ul>
+        </div>
+    </header>
+
+    <hr>
+
+    <main>
+        <section class="experience">
+            <h2>Parcours Professionnel</h2>
+            <ul>
+                <li><strong>{job} at TechCorp</strong> (2020 - Present)</li>
+                <li><strong>{job} at WebSolutions</strong> (2018 - 2020)</li>
+                <li><strong>{job} at CodeFactory</strong> (2017 - 2018)</li>
+            </ul>
+        </section>
+
+        <hr>
+
+        <section class="education">
+            <h2>Formations</h2>
+            <ol>
+                <li><strong>Master's in Computer Science</strong> - University of Paris (2015 - 2017)</li>
+                <li><strong>Bachelor's in Information Technology</strong> - University of Lyon (2012 - 2015)</li>
+            </ol>
+        </section>
+
+        <hr>
+
+        <section class="skills">
+            <table>
+                <caption>Compétences Techniques</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Programming Languages</th>
+                        <th scope="col">Frameworks</th>
+                        <th scope="col">Databases</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Python, JavaScript, Java</td>
+                        <td>Django, React, Angular</td>
+                        <td style="border-color: #424242;">MySQL, PostgreSQL, MongoDB</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="soft-skills">
+            <table>
+                <caption>Soft Skills</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Communication</th>
+                        <th scope="col">Teamwork</th>
+                        <th scope="col">Problem Solving</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Excellent verbal and written communication skills</td>
+                        <td>Proven ability to work effectively in team environments</td>
+                        <td style="border-color: #424242;">Strong analytical and problem-solving abilities</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>
