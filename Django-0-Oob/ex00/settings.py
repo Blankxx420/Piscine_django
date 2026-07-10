@@ -1,0 +1,6 @@
+name = "Alain"
+firstname = "Deloin"
+age = "50"
+job = "Sosie"
+email = "brice.example@hotmail.com"
+phone_number = "06 46 22 52 10"
