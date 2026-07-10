@@ -5,79 +5,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My CV</title>
     <style>
-        table {
+        table {{
             border-collapse: collapse;
             width: 100%;
             margin-bottom: 20px;
-        }
+        }}
 
-        th, td {
+        th, td {{
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
-        }
+        }}
 
-        th {
+        th {{
             background-color: #f2f2f2;
-        }
+        }}
 
-        body {
+        body {{
             font-family: Arial, sans-serif;
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-        }
+        }}
 
-        h1, #job-title, .contact-info, header {
+        h1, #job-title, .contact-info, header {{
             text-align: center;
-        }
+        }}
 
-        h1 {
+        h1 {{
             margin-bottom: 5px;
-        }
+        }}
 
-        #job-title {
+        #job-title {{
             font-style: italic;
             margin-top: 0;
             margin-bottom: 20px;
-        }
+        }}
 
-        section {
+        section {{
             margin-bottom: 20px;
-        }
-        .experience, .education {
+        }}
+        .experience, .education {{
             text-align: center;
             margin-bottom: 20px;
-        }
-        ul, ol {
+        }}
+        ul, ol {{
             list-style-type: none;
             padding-left: 0;
-        }
+        }}
 
-        li {
+        li {{
             margin-bottom: 8px;
-        }
+        }}
 
-        hr {
+        hr {{
             border: none;
             border-top: 2px solid #333;
             margin: 20px auto;
             width: 50%;
-        }
+        }}
 
-        #separator {
+        #separator {{
             border: none;
             border-top: 2px solid #333;
             margin: 10px auto 20px auto;
             width: 25%;
-        }
+        }}
 
-        caption {
+        caption {{
             text-align: center;
             font-weight: bold;
             margin-bottom: 10px;
             font-size: 1.2em;
-        }
+        }}
     </style>
 </head>
 <body>
