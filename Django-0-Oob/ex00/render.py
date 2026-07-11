@@ -1,5 +1,4 @@
 from sys import argv, exit, stderr
-from re import search
 
 
 def check_arguments():
