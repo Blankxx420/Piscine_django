@@ -26,4 +26,4 @@ def get_wikipedia_page():
 
 if __name__ == "__main__":
     check_arguments()
-    repsonse = get_wikipedia_page()
+    response = get_wikipedia_page()
