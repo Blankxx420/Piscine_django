@@ -30,19 +30,22 @@ def get_wikipedia_page(search_word):
 
 def parse_response(response):
     bs = BeautifulSoup(response, "html.parser")
-    all_link = bs.find_all("a")
-    
-    for link in all_link:
-        if link["href"].startswith("/wiki/") \
-            and ':' not in link["href"] \
-            and link["href"] != "/wiki/Main_Page":
-
-            word_to_search = link["href"].replace("/wiki/", "")
-            return word_to_search
-    return None
-
+    id_bodycontent = bs.find(id="bodyContent")
+    paragraphes = id_bodycontent.find_all("p")
+    for p in paragraphes:
+        p_tag = p.find("a")
+        if p_tag is not None and p_tag.has_attr("title"):
+            return p.find("a")["title"]
+        0
+def iter_to_philosophy():
+    response = get_wikipedia_page(argv[1])
+    link = parse_response(response)
+    while link != "Philosophy":
+        print(link)
+        response = get_wikipedia_page(link)
+        link = parse_response(response)
+            
 
 if __name__ == "__main__":
     check_arguments()
-    response = get_wikipedia_page(argv[1])
-    print(parse_response(response))
+    iter_to_philosophy()
