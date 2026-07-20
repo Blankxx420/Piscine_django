@@ -5,13 +5,13 @@ from bs4 import BeautifulSoup
 class LinkFinder:
 
     def __init__(self):
-        self.depth = 0
+        self.parenthesis_depth = 0
         self.namespaces = [
             "Help:", "File:", "Wikipedia:", "Category:", "Talk:", "Special:",
             "Portal:", "Template:", "Draft:", "User:", "MediaWiki:", "Module:",
             "WT:", "WP:"
         ]
-    
+
     def is_href_valid(self, href):
 
         if not href or not href.startwith("/wiki/"):
@@ -29,6 +29,7 @@ class LinkFinder:
             if current.name in ["i", "em"]:
                 return True
             current = current.parent
+        return False
 
 
 def check_arguments():
