@@ -40,6 +40,30 @@ def check_arguments():
         stderr.write("Error invalid arguments : Expected a none empty string\n")
         exit(1)
 
+def make_request(url):
+    header = {"User-Agent": "road_to_philosopy.py (your_email@example.com)"}
+    try:
+        response = requests.get(url, headers=header, timeout=10)
+        if response.status_code == 404:
+            print("It leads to a dead end !")
+            exit(0)
+        response.raise_for_status()
+        return response
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching page: {e}")
+        exit(1)
+
+
+def main():
+    check_arguments()
+
+    search_term = argv[1]
+    path = search_term.replace(' ', '_')
+    url = f"https://en.wikipedia.org/wiki/{path}"
+
+    while True:
+        response = make_request(url)
+
 
             
 
