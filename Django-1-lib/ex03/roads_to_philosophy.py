@@ -53,6 +53,12 @@ def make_request(url):
         print(f"Error fetching page: {e}")
         exit(1)
 
+def get_redirect_title(bs):
+    redirect_msg = bs.find('span', class_='mw-redirectedfrom')
+    if redirect_msg:
+        a_tag = redirect_msg.find('a')
+        if a_tag:
+            return a_tag.text
 
 def main():
     check_arguments()
@@ -63,6 +69,7 @@ def main():
 
     while True:
         response = make_request(url)
+        bs = BeautifulSoup(response.text, "html.parser")
 
 
             
