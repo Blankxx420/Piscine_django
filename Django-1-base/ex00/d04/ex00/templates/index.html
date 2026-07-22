@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex00 : Markdown Cheatsheet.</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #212529;
+            --primary-color: #0d6efd;
+            --code-bg: #f1f3f5;
+            --border-color: #dee2e6;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
+            color: #343a40;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: #e9ecef;
+            font-weight: 600;
+        }
+
+        code {
+            background-color: var(--code-bg);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+            font-size: 0.9em;
+            color: #d63384;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+
+        pre code {
+            color: var(--text-color);
+            background-color: transparent;
+            padding: 0;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--primary-color);
+            margin: 1rem 0;
+            padding: 0.5rem 1rem;
+            background-color: #f8f9fa;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Ex00 : Markdown Cheatsheet.</h1>
+    <p>Ce tableau répertorie les éléments de syntaxe Markdown les plus courants. Il peut vous servir de référence rapide pour la rédaction de vos documents.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Élément</th>
+                <th>Ce que vous tapez (Syntaxe)</th>
+                <th>Ce que vous obtenez (Rendu)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Titres</strong></td>
+                <td>
+                    <code># Titre de niveau 1</code><br>
+                    <code>## Titre de niveau 2</code><br>
+                    <code>### Titre de niveau 3</code>
+                </td>
+                <td>
+                    <h1>Titre 1</h1>
+                    <h2>Titre 2</h2>
+                    <h3>Titre 3</h3>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Gras</strong></td>
+                <td><code>**Texte en gras**</code> ou<br><code>__Texte en gras__</code></td>
+                <td><strong>Texte en gras</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Italique</strong></td>
+                <td><code>*Texte en italique*</code> ou<br><code>_Texte en italique_</code></td>
+                <td><em>Texte en italique</em></td>
+            </tr>
+            <tr>
+                <td><strong>Listes à puces</strong></td>
+                <td>
+                    <code>* Élément 1</code><br>
+                    <code>* Élément 2</code><br>
+                    <code>  * Sous-élément</code>
+                </td>
+                <td>
+                    <ul>
+                        <li>Élément 1</li>
+                        <li>Élément 2
+                            <ul>
+                                <li>Sous-élément</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Listes numérotées</strong></td>
+                <td>
+                    <code>1. Premier</code><br>
+                    <code>2. Second</code><br>
+                    <code>3. Troisième</code>
+                </td>
+                <td>
+                    <ol>
+                        <li>Premier</li>
+                        <li>Second</li>
+                        <li>Troisième</li>
+                    </ol>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Liens</strong></td>
+                <td><code>[Libellé du lien](https://www.exemple.com)</code></td>
+                <td><a href="https://www.exemple.com" target="_blank">Libellé du lien</a></td>
+            </tr>
+            <tr>
+                <td><strong>Images</strong></td>
+                <td><code>![Texte alternatif](url-de-limage.jpg)</code></td>
+                <td><em>(Affiche l'image pointée par l'URL)</em></td>
+            </tr>
+            <tr>
+                <td><strong>Citations</strong></td>
+                <td><code>> Ceci est une citation.</code></td>
+                <td><blockquote>Ceci est une citation.</blockquote></td>
+            </tr>
+            <tr>
+                <td><strong>Code en ligne</strong></td>
+                <td><code>`code_en_ligne()`</code></td>
+                <td><code>code_en_ligne()</code></td>
+            </tr>
+            <tr>
+                <td><strong>Blocs de code</strong></td>
+                <td>
+                    <pre><code>```python
+print("Bonjour")
+```</code></pre>
+                </td>
+                <td>
+                    <pre style="margin:0;"><code>print("Bonjour")</code></pre>
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Ligne de séparation</strong></td>
+                <td><code>---</code> ou <code>***</code></td>
+                <td><hr style="border: 0; border-top: 1px solid var(--border-color);"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
