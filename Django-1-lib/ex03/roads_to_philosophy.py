@@ -106,7 +106,7 @@ def main():
     path = search_term.replace(' ', '_')
     url = f"https://en.wikipedia.org/wiki/{path}"
     headers = {
-        "User-Agent": "request_wikipedia.py (your_email@example.com)"
+        "User-Agent": "road_to_philosophy.py (your_email@example.com)"
     }
     roads = []
 
