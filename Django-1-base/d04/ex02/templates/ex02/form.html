@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex02</title>
+</head>
+<body>
+    <h1><h1>
+    <main>
+        <section>
+            <h2>Formulaire</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+        <section>
+            <h2>Historique</h2>
+            {%if history%}
+                <ul>
+                    {% for entry in history %}
+                        <li><strong> {{entry.timestamp}} - {{entry.text}} </strong></li>
+                    {% endfor %}
+                </ul>
+            {%endif%}
+        <section>
+    
+</body>
+</html>

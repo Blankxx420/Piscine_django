@@ -1,0 +1,27 @@
+{% extends "ex01/base.html" %}
+
+{% block title %}Ex01 : Moteur de template.{% endblock %}
+
+{% block body_class %}theme-style2{% endblock %}
+
+{% block content %}
+    <h1>Ex01 : Moteur de template.</h1>
+    <p>Le moteur de templates par défaut de Django permet de structurer dynamiquement l'affichage grâce à plusieurs fonctionnalités clés :</p>
+    
+    <ul>
+        <li>
+            <strong>Affichage de variables :</strong> Permet d'injecter des données issues du contexte de la vue à l'aide de doubles accolades 
+            {% verbatim %}{{ variable }}{% endverbatim %}.
+        </li>
+        <li>
+            <strong>Les blocs :</strong> Permettent de définir des zones modifiables dans un template parent prêtes à être surchargées via 
+            {% verbatim %}{% block nom %}{% endblock %}{% endverbatim %}.
+        </li>
+        <li>
+            <strong>Les structures de contrôle <code>if</code> :</strong> Permettent d'afficher conditionnellement du contenu selon l'évaluation d'expressions.
+        </li>
+        <li>
+            <strong>Les boucles <code>for ... in</code> :</strong> Permettent d'itérer facilement sur des listes ou des objets transmis par le contexte.
+        </li>
+    </ul>
+{% endblock %}

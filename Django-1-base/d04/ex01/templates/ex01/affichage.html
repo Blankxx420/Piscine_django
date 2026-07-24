@@ -1,0 +1,16 @@
+{% extends "ex01/base.html" %}
+{% load static %}
+
+{% block title %}Ex01 : Processus d’affichage d’une page statique.{% endblock %}
+
+{% block content %}
+    <h1>Ex01 : Processus d’affichage d’une page statique.</h1>
+    <p>Le processus d'affichage d'une page statique suit le cycle requête-réponse de Django :</p>
+    <ol>
+        <li><strong>Requête :</strong> L'utilisateur envoie une requête HTTP via son navigateur vers une URL spécifique.</li>
+        <li><strong>Routage (<code>urls.py</code>) :</strong> Django intercepte l'URL et l'associe à une fonction ou classe de vue (<code>views.py</code>).</li>
+        <li><strong>Vue (<code>views.py</code>) :</strong> La vue traite la logique (pour une page statique, elle prépare simplement le contexte minimal) et appelle le moteur de rendu avec un template.</li>
+        <li><strong>Template :</strong> Le moteur de template génère le code HTML final à partir du fichier template.</li>
+        <li><strong>Réponse :</strong> La vue retourne le tout sous forme d'objet <code>HttpResponse</code> renvoyé au navigateur.</li>
+    </ol>
+{% endblock %}
