@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des films</title>
+</head>
+<body>
+
+    <h1>Supprimer un film</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <label for="movie_id">Choose a movie to erase :</label>
+        <select name="movie_id" id="movie_id" required>
+            <option value="" disabled selected>-- Select a movie --</option>
+            {% for movie in movies %}
+                <option value="{{ movie.episode_nb}}">{{ movie.title }}</option>
+            {% endfor %}
+        </select>
+        
+        <button type="submit">Remove</button>
+    </form>
+
+</body>
+</html>
