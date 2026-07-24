@@ -25,8 +25,8 @@ def form_text(request):
 
     if os.path.exists(log_file_path):
         with open(log_file_path, 'r') as file:
-            for l in file:
-                line = l.strip()
+            for raw_line in file:
+                line = raw_line.strip()
                 if line:
                    parts = line.split(' - ', 1)
                    if len(parts) == 2:
