@@ -36,7 +36,7 @@ def display(request):
         all_movies = Movies.objects.all()
         headers = ["episode_nb", "title", "opening_crawl", "director", "producer", "release_date"]
         context = {"movies_list": all_movies, "headers": headers}
-        return render(request, "ex03/sql_table.html", context)
+        return render(request, "ex05/sql_table.html", context)
     except (Exception):
         return HttpResponse("No data avaible")
 
@@ -54,5 +54,5 @@ def remove(request):
     if not movies_left:
         return HttpResponse("No data available")
 
-    context = {"form": form,}
+    context = {"form": form}
     return render(request, "ex05/remove_form.html", context)
