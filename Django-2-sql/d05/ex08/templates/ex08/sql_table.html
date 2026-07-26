@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Personnages des planètes venteuses</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Personnages sur des planètes au climat venteux</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Personnage</th>
+                    <th>Planète d'origine</th>
+                    <th>Climat</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tbody>
+                {% for row in data_query %}
+                <tr>
+                    <td>{{ row.people_name }}</td>
+                    <td>{{ row.planet_name }}</td>
+                    <td>{{ row.planet_climate }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </tbody>
+        </table>
+</body>
+</html>
