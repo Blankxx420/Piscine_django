@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex06 movies table</title>
+</head>
+<body>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        th, td {
+            height: 40px;
+            width: 80px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                {% for header in headers %}
+                <th>{{ header }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in movies_list %}
+            <tr>
+                <td>{{ row.episode_nb }}</td>   
+                <td>{{ row.title }}</td>
+                <td>{{ row.opening_crawl }}</td>
+                <td>{{ row.director }}</td>
+                <td>{{ row.producer }}</td>
+                <td>{{ row.release_date }}</td>
+                <td>{{ row.created }}</td>
+                <td>{{ row.updated }}</td>
+            </tr>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
+    
+</body>
+</html>

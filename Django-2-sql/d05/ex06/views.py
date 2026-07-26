@@ -1,7 +1,8 @@
-from django.http import HttpResponse
-from django.shortcuts import render
 import psycopg2
 import psycopg2.extras
+from django.http import HttpResponse
+from django.shortcuts import render
+
 
 def init(request):
     try:
@@ -11,17 +12,32 @@ def init(request):
             password="secret",
             host="localhost"
         )
-        sql_buffer = """CREATE TABLE IF NOT EXISTS ex04_movies (
+        sql_buffer = """CREATE TABLE IF NOT EXISTS ex06_movies (
         title VARCHAR(64) UNIQUE NOT NULL,
         episode_nb INT PRIMARY KEY,
         opening_crawl TEXT,
         director VARCHAR(32) NOT NULL,
         producer VARCHAR(128) NOT NULL,
-        release_date DATE NOT NULL
+        release_date DATE NOT NULL,
+        created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );"""
-        
+
+        sql_trigger = """CREATE OR REPLACE FUNCTION update_changetimestamp_column()
+        RETURNS TRIGGER AS $$
+        BEGIN
+        NEW.updated = now();
+        NEW.created = OLD.created;
+        RETURN NEW;
+        END;
+        $$ language 'plpgsql';
+        CREATE TRIGGER update_films_changetimestamp BEFORE UPDATE
+        ON ex06_movies FOR EACH ROW EXECUTE PROCEDURE
+        update_changetimestamp_column();
+        """
         with ps.cursor() as curs:
             curs.execute(sql_buffer)
+            curs.execute(sql_trigger)
             ps.commit()
             curs.close()
         
@@ -56,7 +72,7 @@ def populate(request):
         for element in sql_list_insert:
             try:
                 sql_request = """
-                    INSERT INTO ex04_movies (episode_nb, title, director, producer, release_date)
+                    INSERT INTO ex06_movies (episode_nb, title, director, producer, release_date)
                     VALUES (%s, %s, %s, %s, %s)"""
                 values = (
                     element["episode_nb"],
@@ -87,20 +103,33 @@ def display(request):
             host="localhost"
         ) as ps, ps.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
             
-            cursor.execute("SELECT * FROM ex04_movies")
+            cursor.execute("SELECT * FROM ex06_movies")
 
             data = cursor.fetchall()
             if not data:
                 return HttpResponse("No data available")
-            headers = ["episode_nb", "title", "opening_crawl", "director", "producer", "release_date"]
+            headers = ["episode_nb", "title", "opening_crawl", "director", "producer", "release_date", "created", "updated"]
             context = {"movies_list": data, "headers": headers}
-            return render(request, 'ex04/sql_table.html', context)
+            return render(request, 'ex06/sql_table.html', context)
     except psycopg2.DatabaseError as database_error:
         print(database_error)
 
+def update(request):
+    if request.method == "POST":
+        try:
+            form_movie_id = request.POST.get("movie_id")
+            form_opening_crawl = request.POST.get("opening_crawl")
+            with psycopg2.connect(
+                        database="formationdjango",
+                        user="djangouser",
+                        password="secret",
+                        host="localhost"
+                    ) as ps, ps.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
+                cursor.execute("UPDATE ex06_movies SET opening_crawl = %s WHERE episode_nb = %s",(form_opening_crawl, form_movie_id))
+                ps.commit()
 
-def remove(request):
-    remaining_movies = []
+        except Exception:
+            return HttpResponse("No data avaible")
     try:
         with psycopg2.connect(
             database="formationdjango",
@@ -109,22 +138,11 @@ def remove(request):
             host="localhost"
         ) as ps, ps.cursor(cursor_factory=psycopg2.extras.RealDictCursor) as cursor:
             
-           
-            if request.method == "POST":
-                movie_id = request.POST.get('movie_id')
-                print(movie_id)
-                if movie_id:
-                    cursor.execute("DELETE FROM ex04_movies WHERE episode_nb = %s", (movie_id,))
-                    ps.commit()
-
-            cursor.execute("SELECT * FROM ex04_movies")
-            remaining_movies = cursor.fetchall()
-    except psycopg2.DatabaseError:
-        return HttpResponse("No data available")
-
-    # Si la table est vide
-    if not remaining_movies:
-        return HttpResponse("No data available")
-
-    context = {"movies": remaining_movies}
-    return render(request, "ex04/remove_form.html", context)
+            cursor.execute("SELECT episode_nb, title, opening_crawl FROM ex06_movies ORDER BY episode_nb;")
+            movies = cursor.fetchall()
+            context = {"movies": movies}
+            return render(request, "ex06/update_form.html", context)
+     
+    except Exception as e:
+        print("Erreur chargement films :", e)
+        return HttpResponse("Error loading movies")

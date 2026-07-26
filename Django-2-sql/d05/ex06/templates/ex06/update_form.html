@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ex06 update movie</title>
+</head>
+<body>
+    <main>
+        <form action="" method="POST">
+           {% csrf_token %}
+            <label for="movie_select">Choose a movie to update :</label>
+            <select name="movie_id" id="movie_select" required>
+                <option value="" disabled selected>-- Select a movie --</option>
+                {% for movie in movies %}
+                    <option value="{{ movie.episode_nb }}">{{ movie.title }}</option>
+                {% endfor %}
+            </select>
+            
+            <label for="opening_crawl_input">Opening crawl :</label>
+            <textarea id="opening_crawl_input" name="opening_crawl" placeholder="Update Opening crawl" required>{{ movie.opening_crawl}}</textarea>
+            
+            <button type="submit">update</button>
+        </form>
+    </main>
+</body>
+</html>
