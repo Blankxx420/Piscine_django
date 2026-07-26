@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ex05 Remove</title>
+</head>
+<body>
+
+    <h1>Erase a movie</h1>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        
+        <button type="submit">Remove</button>
+    </form>
+
+</body>
+</html>
