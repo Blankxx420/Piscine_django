@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Personnages des planètes venteuses</title>
+    <style>
+        body {font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; color: #333;}
+        h1 {color: #2c3e50;}
+        table {width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-top: 20px;}
+        th, td {padding: 12px 15px; text-align: left; border-bottom: 1px solid #ddd;}
+        th {background-color: #34495e; color: white;}
+        tr:hover {background-color: #f1f1f1;}
+        .no-data { color: #d9534f; font-weight: bold; background: #fdf7f7; padding: 15px; border: 1px solid #ebccd1; }
+        code { background: #f1f1f1; padding: 2px 5px; border-radius: 4px; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+    <h1>characters and Planets (Climate : Windy)</h1>
+
+    {% if characters %}
+        <table>
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>Origin planet</th>
+                    <th>Climate</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in characters %}
+                <tr>
+                    <td>{{ p.name }}</td>
+                    <td>{{ p.homeworld }}</td>
+                    <td>{{ p.homeworld.climate }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="no-data">
+            No data available, please use the following command line before use:
+            <br><br>
+            <code>{{ command_line }}</code>
+        </div>
+    {% endif %}
+
+</body>
+</html>
