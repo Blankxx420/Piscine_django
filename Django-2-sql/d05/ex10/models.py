@@ -24,14 +24,15 @@ class People(models.Model):
     eye_color = models.CharField(max_length=32, blank=True)
     hair_color = models.CharField(max_length=32, blank=True)
     height = models.IntegerField(blank=True, null=True)
-    mass = models.FloatField(blank=True, null=True)  # Réel
+    mass = models.FloatField(blank=True, null=True)
     
-    # Clé étrangère pointant vers le champ 'name' de la table Planets
     homeworld = models.ForeignKey(
         Planets,
         to_field="name",
         on_delete=models.CASCADE,
-        related_name="residents"
+        related_name="residents",
+        null=True,
+        blank=True
     )
     
     created = models.DateTimeField(auto_now_add=True)
@@ -39,3 +40,18 @@ class People(models.Model):
 
     def __str__(self):
         return self.name
+
+class Movies(models.Model):
+
+    title = models.CharField(max_length=64, unique=True, null=False)
+    episode_nb = models.IntegerField(primary_key=True)
+    opening_crawl = models.TextField(null=True)
+    director = models.CharField(max_length=32, null=False)
+    producer = models.CharField(max_length=128, null=False)
+    release_date = models.DateField(null=False)
+    characters = models.ManyToManyField(People, related_name="movies")
+
+
+    def __str__(self):
+        return self.title
+    

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>ex10 Research</title>
+</head>
+<body>
+
+    <h1>Search characters from a movie</h1>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        
+        <button type="submit">search</button>
+    </form>
+
+    {% if characters %}
+        <table>
+            <thead>
+                <tr>
+                    <th>movie title</th>
+                    <th>name</th>
+                    <th>gender</th>
+                    <th>homeworld</th>
+                    <th>diameter of origin planet</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in characters %}
+                <tr>
+                    <td>{{ item.movie.title }}</td>
+                    <td>{{ item.character.name }}</td>
+                    <td>{{ item.character.gender }}</td>
+                    <td>{{ item.character.homeworld.name }}</td>
+                    <td>{{ item.character.homeworld.diameter }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Nothing corresponding to your research</p>
+    {% endif %}
+
+</body>
+</html>
