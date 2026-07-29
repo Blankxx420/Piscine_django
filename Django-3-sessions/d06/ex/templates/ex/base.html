@@ -1,0 +1,27 @@
+{% load django_bootstrap5 %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Pro Tips - Les meilleures astuces du quotidien</title>
+    
+    {# Charge automatiquement les balises CSS de Bootstrap 5 #}
+    {% bootstrap_css %}
+</head>
+<body class="bg-light">
+    {%block nav%}
+    {% endblock %}
+    <main class="container my-5">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="text-center py-4 text-muted border-top bg-white">
+        <p class="mb-0">LifeProTips &copy; 2026 - Apprenez, astucez, partagez.</p>
+    </footer>
+
+    {# Charge automatiquement les scripts JS de Bootstrap 5 #}
+    {% bootstrap_javascript %}
+</body>
+</html>

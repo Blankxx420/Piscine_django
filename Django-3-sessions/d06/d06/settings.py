@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from random import random
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +28,20 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+
+ANONYMOUS_USERNAME = [
+    "Anonymous_1",
+    "Anonymous_2",
+    "Anonymous_3",
+    "Anonymous_4",
+    "Anonymous_5",
+    "Anonymous_6",
+    "Anonymous_7",
+    "Anonymous_8",
+    "Anonymous_9",
+    "Anonymous_10",
+]
 
 # Application definition
 
@@ -35,8 +50,10 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django_bootstrap5',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ex'
 ]
 
 MIDDLEWARE = [
