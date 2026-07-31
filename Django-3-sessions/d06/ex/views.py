@@ -61,7 +61,7 @@ def login_user(request):
     else:
         form = AuthenticationForm()
     context = {"form": form}
-    return render(request, "ex/login.html", context)  # Template dédié pour la connexion
+    return render(request, "ex/login.html", context)
 
 @login_required
 def log_out_user(request):
