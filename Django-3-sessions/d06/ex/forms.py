@@ -15,6 +15,6 @@ class TipsForm(ModelForm):
             "content": forms.Textarea(attrs={
                 "class": "form-control",
                 "placeholder": "Write your tips here...",
-                "rows": 3
+                "rows": 6
             })
         }

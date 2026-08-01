@@ -1,0 +1,11 @@
+<h2 class="mb-4">Latest tips</h2>
+        {% for tip in tips %}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <p class="card-text">{{ tip.content }}</p>
+                    <small class="text-muted">Par <strong>{{ tip.author }}</strong> le {{ tip.date_creation }}</small>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">No tips shared for the moment</p>
+        {% endfor %}

@@ -8,72 +8,12 @@
     {% bootstrap_css %}
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm flex-shrink-0">
-        <div class="container">
-            <a class="navbar-brand fw-bold text-warning" href="{% url 'homepage' %}">💡 LifeProTips</a>
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item ms-3">
-                        <span class="badge bg-warning text-dark px-3 py-2">
-                            {% if request.user.is_authenticated %}
-                                Hello {{ request.user.username }} !
-                            {% else %}
-                                Hello {{ username }} !
-                            {% endif %}
-                        </span>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'homepage' %}">Home</a>
-                    </li>
-                    
-                    {% if not request.user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'register' %}">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'login' %}">Log in</a>
-                        </li>
-                    {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link active text-danger" href="{% url 'logout' %}">Log out</a>
-                        </li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-
     <main class="container my-5 flex-grow-1">
-        <h2 class="mb-4">Latest tips</h2>
-        {% block content %}
-        {% for tip in tips %}
-            <div class="card mb-3 shadow-sm">
-                <div class="card-body">
-                    <p class="card-text">{{ tip.content }}</p>
-                    <small class="text-muted">Par <strong>{{ tip.author }}</strong> le {{ tip.date_creation }}</small>
-                </div>
-            </div>
-        {% empty %}
-            <p class="text-muted">No tips shared for the moment</p>
-        {% endfor %}
+        {% include "ex/nav.html" %}
+        {% include "ex/tips_display.html"%}
         {% if request.user.is_authenticated %}
-            <div class="card shadow-sm mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Share a tips</h5>
-                    <form method="POST">
-                        {% csrf_token %}
-                        {% bootstrap_form tipsform %}
-                        <button type="submit" class="btn btn-primary mt-2">Publicate</button>
-                    </form>
-                </div>
-            </div>
+            {% include "ex/tips_form.html" %}
         {% endif %}
-{% endblock %}
     </main>
 
     <footer class="text-center py-4 text-muted border-top bg-white flex-shrink-0">

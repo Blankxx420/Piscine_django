@@ -1,0 +1,10 @@
+<div class="card shadow-sm mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Share a tips</h5>
+        <form method="POST">
+            {% csrf_token %}
+            {% bootstrap_form tipsform %}
+            <button type="submit" class="btn btn-primary mt-2">Publicate</button>
+        </form>
+    </div>
+</div>
