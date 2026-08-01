@@ -3,7 +3,7 @@ from django.db import models
 
 
 class ModelTips(models.Model):
-    
+
     content = models.TextField(null=False)
     author = models.CharField(null=False)
     date_creation = models.DateTimeField(auto_now=True)
@@ -13,9 +13,9 @@ class ModelTips(models.Model):
 
 
     @property
-    def total_upvote(self):
+    def total_upvotes(self):
         return self.upvotes.count()
 
     @property
-    def total_downvote(self):
-        return self.upvotes.count()
+    def total_downvotes(self):
+        return self.downvotes.count()

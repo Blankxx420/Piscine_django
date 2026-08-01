@@ -10,10 +10,14 @@
 <body class="bg-light d-flex flex-column min-vh-100">
     <main class="container my-5 flex-grow-1">
         {% include "ex/nav.html" %}
+
+    {% block content %}
+
         {% include "ex/tips_display.html"%}
         {% if request.user.is_authenticated %}
             {% include "ex/tips_form.html" %}
         {% endif %}
+    {% endblock %}
     </main>
 
     <footer class="text-center py-4 text-muted border-top bg-white flex-shrink-0">

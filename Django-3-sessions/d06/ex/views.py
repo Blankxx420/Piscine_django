@@ -87,11 +87,31 @@ def log_out_user(request):
 @login_required
 def upvote_tips(request, tip_id):
     tip = get_object_or_404(ModelTips, id=tip_id)
+    
     if request.user in tip.downvotes.all():
         tip.downvotes.remove(request.user)
+    
     
     if request.user in tip.upvotes.all():
         tip.upvotes.remove(request.user)
     else:
+        
         tip.upvotes.add(request.user)
+        
+    return redirect("homepage")
+
+
+@login_required
+def downvote_tips(request, tip_id):
+    tip = get_object_or_404(ModelTips, id=tip_id)
+    
+    if request.user in tip.upvotes.all():
+        tip.upvotes.remove(request.user)
+        
+    if request.user in tip.downvotes.all():
+        tip.downvotes.remove(request.user)
+
+    else:
+        tip.downvotes.add(request.user)
+        
     return redirect("homepage")

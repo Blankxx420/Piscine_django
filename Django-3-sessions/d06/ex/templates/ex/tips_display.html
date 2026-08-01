@@ -1,14 +1,27 @@
+{% load django_bootstrap5 %}
+
 <h2 class="mb-4">Latest tips</h2>
-        {% for tip in tips %}
-            <div class="card mb-3 shadow-sm">
-                <div class="card-body">
-                    <p class="card-text">{{ tip.content }}</p>
-                    <small class="text-muted">Par <strong>{{ tip.author }}</strong> le {{ tip.date_creation }}</small>
-                    <a href="{% url 'upvote_tip' tip.id %}" class="btn btn-sm {% if request.user in tip.upvotes.all %}btn-success{% else %}btn-outline-success{% endif %} rounded-circle d-flex justify-content-center align-items-center" style="width: 38px; height: 38px;" title="Upvote">
-    👍
-</a>
-                </div>
+{% for tip in tips %}
+    <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+            <p class="card-text">{{ tip.content }}</p>
+            <small class="text-muted">Par <strong>{{ tip.author }}</strong> le {{ tip.date_creation }}</small>
+
+            <div class="mt-3 d-flex align-items-center">
+                <a href="{% url 'upvote_tip' tip.id %}" class="btn btn-sm 
+                {% if request.user in tip.upvotes.all %}btn-success{% else %}btn-outline-success{% endif %}
+                rounded-circle d-flex justify-content-center align-items-center me-1" 
+                style="width: 38px; height: 38px;" title="Upvote">👍</a>
+                <span class="badge bg-secondary me-3">{{ tip.total_upvotes }}</span>
+
+                <a href="{% url 'downvote_tip' tip.id %}" class="btn btn-sm 
+                {% if request.user in tip.downvotes.all %}btn-danger{% else %}btn-outline-danger{% endif %}
+                rounded-circle d-flex justify-content-center align-items-center me-1" 
+                style="width: 38px; height: 38px;" title="Downvote">👎</a>
+                <span class="badge bg-secondary">{{ tip.total_downvotes }}</span>
             </div>
-        {% empty %}
-            <p class="text-muted">No tips shared for the moment</p>
-        {% endfor %}
+        </div>
+    </div>
+{% empty %}
+    <p class="text-muted">No tips shared for the moment</p>
+{% endfor %}
