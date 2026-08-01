@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Life Pro Tips - Les meilleures astuces du quotidien</title>
+    <title>Life Pro Tips - Best tips of Everyday</title>
     {% bootstrap_css %}
 </head>
 <body class="bg-light d-flex flex-column min-vh-100">
@@ -49,12 +49,35 @@
     </nav>
 
     <main class="container my-5 flex-grow-1">
+        <h2 class="mb-4">Latest tips</h2>
         {% block content %}
-        {% endblock %}
+        {% for tip in tips %}
+            <div class="card mb-3 shadow-sm">
+                <div class="card-body">
+                    <p class="card-text">{{ tip.content }}</p>
+                    <small class="text-muted">Par <strong>{{ tip.author }}</strong> le {{ tip.date_creation }}</small>
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-muted">No tips shared for the moment</p>
+        {% endfor %}
+        {% if request.user.is_authenticated %}
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Share a tips</h5>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form tipsform %}
+                        <button type="submit" class="btn btn-primary mt-2">Publicate</button>
+                    </form>
+                </div>
+            </div>
+        {% endif %}
+{% endblock %}
     </main>
 
     <footer class="text-center py-4 text-muted border-top bg-white flex-shrink-0">
-        <p class="mb-0">LifeProTips &copy; 2026 - Apprenez, astucez, partagez.</p>
+        <p class="mb-0">LifeProTips &copy; 2026 - Learn, tips, share.</p>
     </footer>
     {% bootstrap_javascript %}
 </body>

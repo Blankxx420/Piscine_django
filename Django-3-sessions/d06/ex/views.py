@@ -3,14 +3,30 @@ import random
 from django.conf import settings
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.utils import timezone
+
+from .forms import TipsForm
+from .models import ModelTips
 
 
 def homepage(request: HttpRequest):
-    try:
+
+    all_tips = ModelTips.objects.all().order_by('-date_creation')
+    tipsform = TipsForm()
+
+    if request.method == "POST" and request.user.is_authenticated:
+        tipsform = TipsForm(request.POST)
+        if tipsform.is_valid():
+            tip = tipsform.save(commit=False)
+            tip.author = request.user.username
+            tip.save()
+            return redirect("homepage")
+        
+    username = None
+    if not request.user.is_authenticated:
         now = timezone.now()
         expiration = request.session.get('username_expiration')
         choices = getattr(settings, 'ANONYMOUS_USERNAME', ['Guest'])
@@ -19,18 +35,18 @@ def homepage(request: HttpRequest):
             if len(choices) > 1:
                 while username == request.session.get('guest_username'):
                     username = random.choice(choices)
-                    
             request.session['guest_username'] = username
             request.session['username_expiration'] = now + timezone.timedelta(seconds=42)
             request.session.modified = True
         else:
             username = request.session.get('guest_username')
-            
-        context = {"username": username}
-        return render(request, "ex/base.html", context)
-        
-    except Exception as error:
-        return HttpResponse(f"Erreur interne : {error}", status=500)
+
+    context = {
+        "username": username,
+        "tips": all_tips,
+        "tipsform": tipsform
+    }
+    return render(request, "ex/base.html", context)
 
 
 def register(request):
