@@ -4,8 +4,8 @@ from django.conf import settings
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect, render
+from django.http import HttpRequest
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
 from .forms import TipsForm
@@ -82,4 +82,16 @@ def login_user(request):
 @login_required
 def log_out_user(request):
     logout(request)
+    return redirect("homepage")
+
+@login_required
+def upvote_tips(request, tip_id):
+    tip = get_object_or_404(ModelTips, id=tip_id)
+    if request.user in tip.downvotes.all():
+        tip.downvotes.remove(request.user)
+    
+    if request.user in tip.upvotes.all():
+        tip.upvotes.remove(request.user)
+    else:
+        tip.upvotes.add(request.user)
     return redirect("homepage")

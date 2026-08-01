@@ -4,6 +4,9 @@
                 <div class="card-body">
                     <p class="card-text">{{ tip.content }}</p>
                     <small class="text-muted">Par <strong>{{ tip.author }}</strong> le {{ tip.date_creation }}</small>
+                    <a href="{% url 'upvote_tip' tip.id %}" class="btn btn-sm {% if request.user in tip.upvotes.all %}btn-success{% else %}btn-outline-success{% endif %} rounded-circle d-flex justify-content-center align-items-center" style="width: 38px; height: 38px;" title="Upvote">
+    👍
+</a>
                 </div>
             </div>
         {% empty %}
