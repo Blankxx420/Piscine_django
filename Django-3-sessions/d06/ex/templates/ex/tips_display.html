@@ -19,6 +19,8 @@
                 rounded-circle d-flex justify-content-center align-items-center me-1" 
                 style="width: 38px; height: 38px;" title="Downvote">👎</a>
                 <span class="badge bg-secondary">{{ tip.total_downvotes }}</span>
+
+                <a href="{% url 'delete_tip' tip.id %}" class="btn btn-sm btn-outline-danger ms-auto" title="Supprimer">🗑️</a>
             </div>
         </div>
     </div>

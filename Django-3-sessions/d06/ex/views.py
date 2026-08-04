@@ -115,3 +115,10 @@ def downvote_tips(request, tip_id):
         tip.downvotes.add(request.user)
         
     return redirect("homepage")
+
+@login_required
+def delete_tip(request, tip_id):
+    tip = get_object_or_404(ModelTips, id=tip_id)
+    if tip.total_downvotes >= tip.total_upvotes:
+        tip.delete()
+    return redirect("homepage")
