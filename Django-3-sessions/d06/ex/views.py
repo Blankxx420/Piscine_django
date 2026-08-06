@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.core.exceptions import PermissionDenied
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -102,8 +103,12 @@ def upvote_tips(request, tip_id):
 
 
 @login_required
+
 def downvote_tips(request, tip_id):
     tip = get_object_or_404(ModelTips, id=tip_id)
+
+    if not (request.user.has_perm("ex.allow_downvotes") or request.user.username == tip.author):
+        raise PermissionDenied
     
     if request.user in tip.upvotes.all():
         tip.upvotes.remove(request.user)

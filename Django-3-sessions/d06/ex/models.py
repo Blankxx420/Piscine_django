@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Permission
 from django.db import models
 
 
@@ -11,6 +11,8 @@ class ModelTips(models.Model):
     upvotes = models.ManyToManyField(User, related_name='upvoted_tips', blank=True)
     downvotes = models.ManyToManyField(User, related_name='downvoted_tips', blank=True)
 
+    class Meta:
+        permissions = [("allow_downvotes", "allow downvote for tips")]
 
     @property
     def total_upvotes(self):
