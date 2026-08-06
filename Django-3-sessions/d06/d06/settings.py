@@ -29,6 +29,8 @@ LOGIN_URL = 'login'
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL = 'ex.CustomUser'
+
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 ANONYMOUS_USERNAME = [

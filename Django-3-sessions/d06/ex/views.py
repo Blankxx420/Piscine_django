@@ -22,7 +22,7 @@ def homepage(request: HttpRequest):
         tipsform = TipsForm(request.POST)
         if tipsform.is_valid():
             tip = tipsform.save(commit=False)
-            tip.author = request.user.username
+            tip.author = request.user
             tip.save()
             return redirect("homepage")
         
@@ -92,33 +92,32 @@ def upvote_tips(request, tip_id):
     if request.user in tip.downvotes.all():
         tip.downvotes.remove(request.user)
     
-    
     if request.user in tip.upvotes.all():
         tip.upvotes.remove(request.user)
     else:
-        
         tip.upvotes.add(request.user)
-        
+
+    tip.author.update_reputation()
+    
     return redirect("homepage")
 
 
 @login_required
-
 def downvote_tips(request, tip_id):
     tip = get_object_or_404(ModelTips, id=tip_id)
-
-    if not (request.user.has_perm("ex.allow_downvotes") or request.user.username == tip.author):
-        raise PermissionDenied
     
+    if not request.user.can_downvote(tip):
+        raise PermissionDenied
+
     if request.user in tip.upvotes.all():
         tip.upvotes.remove(request.user)
-        
     if request.user in tip.downvotes.all():
         tip.downvotes.remove(request.user)
-
     else:
         tip.downvotes.add(request.user)
-        
+    
+    tip.author.update_reputation()
+    
     return redirect("homepage")
 
 @login_required
